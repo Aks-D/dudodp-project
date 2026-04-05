@@ -71,8 +71,7 @@ def step2_evaluate():
     ])
 
     sample_dirs = get_sample_dirs()
-    # 只取第1张图像的前10个mask结果（对应 mar.py 的 num_test_image=1）
-    sample_dirs = sample_dirs[:1]
+    # 与 MAR.yaml 中 num_test_image 保持一致（200 为全部测试图像）
     total = len(sample_dirs) * NUM_METAL_MASKS
     count = 0
     sums = {k: {'psnr': 0, 'ssim': 0} for k in ['MA', 'DuDoDp']}

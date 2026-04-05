@@ -12,7 +12,7 @@
 | **运行方式** | 需手动调用 `mar.py` | 一键运行 `run_dudodp.py`，串联推理 + 评估 + 可视化 |
 | **路径管理** | 硬编码为原作者本地路径 | 修改为相对路径，集中管理于 `config_local.py` |
 | **环境配置** | 需自行安装各依赖 | 提供 `setup_dudodp.sh` 一键安装（conda 环境下） |
-| **测试数据** | 默认仅 1 张图像 | 扩展到 10 张图像（可配置至全部 200 张） |
+| **测试数据** | 默认仅 1 张图像 | 配置为全部 200 张测试图像 |
 
 ### 关键修改清单
 
@@ -21,7 +21,8 @@
 | 文件 | 修改内容 |
 |------|---------|
 | `DuDoDp-MAR/config/MAR.yaml` | `data_dir` 和 `model_path` 改为相对路径 |
-| `DuDoDp-MAR/test_data/SynDeepLesion/test_640geo_dir.txt` | 从 1 张扩展到 10 张测试图像 |
+| `DuDoDp-MAR/test_data/SynDeepLesion/test_640geo_dir.txt` | 需用 SynDeepLesion 数据集自带的完整 200 行版本替换 |
+| `DuDoDp-MAR/config/MAR.yaml` 中 `num_test_image` | 从 1 改为 200，测试全部图像 |
 
 **核心推理代码 `mar.py`、`syndeeplesion_data.py` 与原仓库完全一致**，使用 `torch-radon` FanBeam 算子。
 
@@ -103,8 +104,10 @@ mkdir -p DuDoDp-MAR/Patch-diffusion-pretrained/
 # 从 Google Drive 下载 model150000.pt 放到上述目录
 # 链接: https://drive.google.com/file/d/1pXsLIzQq_PBs52oZ5Sl5sXyGZj7tRdet/view
 
-# 5. ���备 SynDeepLesion 测试数据
+# 5. 准备 SynDeepLesion 测试数据 (https://github.com/hongwang01/SynDeepLesion)
 ln -s /path/to/SynDeepLesion DuDoDp-MAR/test_data/SynDeepLesion
+# 用数据集自带的完整 test_640geo_dir.txt (200条) 替换仓库中的示例版本
+cp /path/to/SynDeepLesion/test_640geo_dir.txt DuDoDp-MAR/test_data/SynDeepLesion/
 
 # 6. 运行推理与评估
 python run_dudodp.py
