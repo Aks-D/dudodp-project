@@ -1,6 +1,6 @@
 [submodule "DuDoDp-MAR"]
 	path = DuDoDp-MAR
-	url = https://github.com/DeepXuan/DuDoDp-MAR.git
+	url = https://github.com/Aks-D/DuDoDp-MAR.git
 [submodule "guided-diffusion"]
 	path = guided-diffusion
 	url = https://github.com/openai/guided-diffusion.git
