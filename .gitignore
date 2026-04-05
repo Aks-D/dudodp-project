@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.pyo
+.claude/
+outputs/
+results_*/
+*.pt
+*.pth
+*.ckpt
